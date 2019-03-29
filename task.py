@@ -24,3 +24,64 @@
 #
 #Delete these comments before commit!
 #Good luck.
+class Bank:
+    def __init__(self, name):
+        self.name = name
+        self.clients = []
+    def addCLient(self, client):
+        if isinstance(client,Client):
+            self.clients.append(client)
+    def create_bank_account(self, client_id):
+        for client in self.clients:
+            if client.id == client_id:
+                client.bank_account = BankAccount
+
+    def input_money(self, money, client_id):
+          for client in self.clients:
+                if client.id == client_id:
+                    pass
+                    #if client.is_bank_account():   
+                    #client.bank_account.input_money(money)
+                    #print(client.id)
+    def __str__(self):
+        return "Bank details:\n\tBank name:{}\n\tNumber of clients:{} ".format(self.name, len(self.clients))
+
+    def removeClient(self, client):
+        pass
+class BankAccount:
+    def __init__(self, money):
+        self.money = 0
+        self.limit = 0
+        
+    def input_money(self, money):
+        self.money += money
+
+    def withdraw_money(self, withdraw):
+        if self.money >= withdraw:
+            self.money -= withdraw
+            return withdraw
+
+    def __str__(self):
+        return "Money:{}".format(self.money)
+
+
+class Client:
+    def __init__(self,ID, name, surname, address, phone_number):
+        self.id = ID
+        self.name = name
+        self.surname = surname
+        self.address = address
+        self.phone_number = phone_number
+        self.bank_account = None
+
+    def is_bank_account(self):
+        return isinstance(self.bank_account, BankAccount)
+
+if __name__ == "__main__":
+    bank = Bank('ING')
+ 
+    client_1 = Client(1,'Caro', 'McMizera', 'Krakow', '570320')
+    bank.addCLient(client_1)
+    bank.create_bank_account(1)
+    bank.input_money(100, 1)
+    print(bank)
